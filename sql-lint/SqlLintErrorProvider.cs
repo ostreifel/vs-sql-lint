@@ -10,7 +10,7 @@ namespace sql_lint
     /// </summary>
     [Export(typeof(IClassifierProvider))]
     [ContentType("text")] // This classifier applies to all text files.
-    internal class SqlClassifierProvider : IClassifierProvider
+    internal class SqlLintErrorProvider : IClassifierProvider
     {
         // Disable "Field is never assigned to..." compiler's warning. Justification: the field is assigned by MEF.
 #pragma warning disable 649
@@ -33,7 +33,7 @@ namespace sql_lint
         /// <returns>A classifier for the text buffer, or null if the provider cannot do so in its current state.</returns>
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
-            return buffer.Properties.GetOrCreateSingletonProperty<SqlClassifier>(creator: () => new SqlClassifier(this.classificationRegistry));
+            return buffer.Properties.GetOrCreateSingletonProperty<SqlLintError>(creator: () => new SqlLintError(this.classificationRegistry));
         }
 
         #endregion

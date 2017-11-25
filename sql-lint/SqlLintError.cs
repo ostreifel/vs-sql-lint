@@ -6,9 +6,9 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace sql_lint
 {
     /// <summary>
-    /// Classifier that classifies all text as an instance of the "SqlClassifier" classification type.
+    /// Classifier that classifies all text as an instance of the "SqlLintError" classification type.
     /// </summary>
-    internal class SqlClassifier : IClassifier
+    internal class SqlLintError : IClassifier
     {
         /// <summary>
         /// Classification type.
@@ -16,12 +16,12 @@ namespace sql_lint
         private readonly IClassificationType classificationType;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SqlClassifier"/> class.
+        /// Initializes a new instance of the <see cref="SqlLintError"/> class.
         /// </summary>
         /// <param name="registry">Classification registry.</param>
-        internal SqlClassifier(IClassificationTypeRegistryService registry)
+        internal SqlLintError(IClassificationTypeRegistryService registry)
         {
-            this.classificationType = registry.GetClassificationType("SqlClassifier");
+            this.classificationType = registry.GetClassificationType("SqlLintError");
         }
 
         #region IClassifier

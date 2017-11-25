@@ -6,23 +6,23 @@ using Microsoft.VisualStudio.Utilities;
 namespace sql_lint
 {
     /// <summary>
-    /// Defines an editor format for the SqlClassifier type that has a purple background
+    /// Defines an editor format for the SqlLintError type that has a purple background
     /// and is underlined.
     /// </summary>
     [Export(typeof(EditorFormatDefinition))]
-    [ClassificationType(ClassificationTypeNames = "SqlClassifier")]
-    [Name("SqlClassifier")]
+    [ClassificationType(ClassificationTypeNames = "SqlLintError")]
+    [Name("SqlLintError")]
     [UserVisible(true)] // This should be visible to the end user
     [Order(Before = Priority.Default)] // Set the priority to be after the default classifiers
-    internal sealed class SqlClassifierFormat : ClassificationFormatDefinition
+    internal sealed class SqlLintErrorFormat : ClassificationFormatDefinition
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SqlClassifierFormat"/> class.
+        /// Initializes a new instance of the <see cref="SqlLintErrorFormat"/> class.
         /// </summary>
-        public SqlClassifierFormat()
+        public SqlLintErrorFormat()
         {
-            this.DisplayName = "SqlClassifier"; // Human readable version of the name
-            this.ForegroundColor = Colors.BlueViolet;
+            this.DisplayName = "SqlLintError"; // Human readable version of the name
+            this.ForegroundColor = Colors.OrangeRed;
             this.TextDecorations = System.Windows.TextDecorations.Underline;
         }
     }
