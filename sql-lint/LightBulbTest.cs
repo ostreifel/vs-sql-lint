@@ -174,21 +174,21 @@ namespace sql_lint
     internal class LowerCaseSuggestedAction : ISuggestedAction
     {
         private ITrackingSpan m_span;
-        private string m_upper;
+        private string m_lower;
         private string m_display;
         private ITextSnapshot m_snapshot;
         public LowerCaseSuggestedAction(ITrackingSpan span)
         {
             m_span = span;
             m_snapshot = span.TextBuffer.CurrentSnapshot;
-            m_upper = span.GetText(m_snapshot).ToUpper();
+            m_lower = span.GetText(m_snapshot).ToLower();
             m_display = string.Format("Convert '{0}' to lower case", span.GetText(m_snapshot));
         }
         public Task<object> GetPreviewAsync(CancellationToken cancellationToken)
         {
             var textBlock = new TextBlock();
             textBlock.Padding = new Thickness(5);
-            textBlock.Inlines.Add(new Run() { Text = m_upper });
+            textBlock.Inlines.Add(new Run() { Text = m_lower });
             return Task.FromResult<object>(textBlock);
         }
         public Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(CancellationToken cancellationToken)
@@ -227,7 +227,7 @@ namespace sql_lint
         }
         public void Invoke(CancellationToken cancellationToken)
         {
-            m_span.TextBuffer.Replace(m_span.GetSpan(m_snapshot), m_upper);
+            m_span.TextBuffer.Replace(m_span.GetSpan(m_snapshot), m_lower);
         }
         public void Dispose()
         {
